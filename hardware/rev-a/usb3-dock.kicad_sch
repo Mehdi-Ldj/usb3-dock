@@ -1,0 +1,310 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "a49b9a59-606c-5fdf-8ff8-6871fc109e4d")
+	(paper "A3")
+	(title_block
+		(title "USB-C Dock with Gigabit Ethernet")
+		(rev "A")
+	)
+	(lib_symbols)
+	(text "USB-C Dock with Gigabit Ethernet — Rev A"
+		(exclude_from_sim no)
+		(at 12.7 17.78 0)
+		(effects
+			(font
+				(size 2.54 2.54)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "a10f2462-20dc-5582-b7cb-d226c209ea60")
+	)
+	(no_connect
+		(at -29.21 101.6)
+		(uuid "c2a837dc-98e9-401d-a684-259d1b58efdc")
+	)
+	(sheet
+		(at 139.7 33.02)
+		(size 76.2 101.6)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "6f13c650-a7b1-54f4-a15b-848bdc9f0bc6")
+		(property "Sheetname" "hub"
+			(at 139.7 32.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "hub.kicad_sch"
+			(at 139.7 135.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "usb3-dock"
+				(path "/1f7b3c40-5a2e-5d18-9c6b-3e9a4d2f7b60"
+					(page "4")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 254 33.02)
+		(size 76.2 101.6)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "8fa95abe-d2d2-58dd-8a64-b51c0d343656")
+		(property "Sheetname" "usb-c"
+			(at 254 32.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "usb-c.kicad_sch"
+			(at 254 135.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "usb3-dock"
+				(path "/1f7b3c40-5a2e-5d18-9c6b-3e9a4d2f7b60"
+					(page "6")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 33.02)
+		(size 76.2 101.6)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "990d5be2-d589-5c30-a450-13fa212c03cf")
+		(property "Sheetname" "power"
+			(at 25.4 32.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "power.kicad_sch"
+			(at 25.4 135.32 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "usb3-dock"
+				(path "/1f7b3c40-5a2e-5d18-9c6b-3e9a4d2f7b60"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 254 190.5)
+		(size 76.2 101.6)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "e80abc1e-9f9b-5c60-9590-ab3dfb9124ca")
+		(property "Sheetname" "mcu"
+			(at 254 189.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "mcu.kicad_sch"
+			(at 254 292.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "usb3-dock"
+				(path "/1f7b3c40-5a2e-5d18-9c6b-3e9a4d2f7b60"
+					(page "7")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 139.7 190.5)
+		(size 76.2 101.6)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "eccd79e1-dbfa-53e6-98d5-95b4624c48b3")
+		(property "Sheetname" "ethernet"
+			(at 139.7 189.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ethernet.kicad_sch"
+			(at 139.7 292.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "usb3-dock"
+				(path "/1f7b3c40-5a2e-5d18-9c6b-3e9a4d2f7b60"
+					(page "5")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 25.4 190.5)
+		(size 76.2 101.6)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0)
+		)
+		(uuid "fc38b71b-590f-5101-be4e-192204ed0a24")
+		(property "Sheetname" "downstream"
+			(at 25.4 189.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "downstream.kicad_sch"
+			(at 25.4 292.8 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(instances
+			(project "usb3-dock"
+				(path "/1f7b3c40-5a2e-5d18-9c6b-3e9a4d2f7b60"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

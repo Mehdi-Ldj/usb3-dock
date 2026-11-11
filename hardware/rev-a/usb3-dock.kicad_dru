@@ -1,0 +1,151 @@
+(version 1)
+
+# ---------------------------------------------------------------------------
+# JLCPCB 4-layer capability envelope, encoded so DRC enforces it.
+#
+# Sources:
+#   jlcpcb.com/capabilities/pcb-capabilities
+#   jlcpcb.com/4-layer-pcb  (JLC04161H-3313)
+#
+# Values are TIGHTER than the fab minimums on purpose: designing at the
+# process limit costs yield and buys nothing. See docs/fab-notes.md.
+#
+# Every constraint in this file was verified to actually fire on KiCad 10.0.7.
+# If you add one, test it with an impossible value — KiCad silently ignores
+# unknown constraints instead of reporting them.
+# ---------------------------------------------------------------------------
+
+(rule "JLC 4L min track width"
+	(constraint track_width (min 0.15mm))
+)
+
+(rule "JLC 4L min clearance"
+	(constraint clearance (min 0.15mm))
+)
+
+(rule "JLC 4L min via diameter"
+	(constraint via_diameter (min 0.45mm))
+)
+
+(rule "JLC 4L min drill"
+	(constraint hole_size (min 0.20mm))
+)
+
+(rule "JLC 4L annular ring"
+	(constraint annular_width (min 0.15mm))
+)
+
+(rule "JLC 4L hole to hole"
+	(constraint hole_to_hole (min 0.25mm))
+)
+
+(rule "JLC 4L board edge clearance"
+	(constraint edge_clearance (min 0.30mm))
+)
+
+# ---------------------------------------------------------------------------
+# SuperSpeed — 90 ohm differential, L1/L4 only (see spec LAY-SS-01).
+# The layer restriction is not expressible as a DRC rule; a separate
+# check enforces it. Do not assume DRC covers it.
+#
+# The gap rule has a MINIMUM only. A 0.15 maximum fired on every fan-out —
+# at connector pins the pair is 0.7-1.8 mm apart, at a mux or hub escape up
+# to 6.9 mm — which is geometry, not a defect. Coupling is enforced by the
+# diff_pair_uncoupled rule instead.
+# ---------------------------------------------------------------------------
+
+(rule "SS_90R pair gap"
+	(constraint diff_pair_gap (min 0.12mm) (opt 0.15mm))
+	(condition "A.NetClass == 'SS_90R'")
+)
+
+# Width: 0.180 nominal, 0.160-0.200 accepted (the pair report's window).
+(rule "SS_90R track width"
+	(constraint track_width (min 0.16mm))
+	(condition "A.NetClass == 'SS_90R'")
+)
+
+# 3.0 mm, not 2.0: a pair that arrives with 1.5 mm of raw skew needs a 1.5 mm
+# tuning meander, and a meander is uncoupled by construction - one trace
+# detours, the other does not.  That alone consumes most of a 2.0 mm budget,
+# and the connector/IC fan-out takes the rest.  3.0 mm is the tuning length
+# plus the escape, and it stays below the 5 mil intra-pair skew limit that the
+# meander exists to satisfy (REQ-SS-03).
+(rule "SS_90R uncoupled length"
+	(constraint diff_pair_uncoupled (max 3.0mm))
+	(condition "A.NetClass == 'SS_90R'")
+)
+
+(rule "SS_90R via count"
+	(constraint via_count (max 2))
+	(condition "A.NetClass == 'SS_90R'")
+)
+
+# ---------------------------------------------------------------------------
+# USB 2.0 — same 90 ohm geometry, looser constraints.
+# ---------------------------------------------------------------------------
+
+(rule "USB2_90R pair gap"
+	(constraint diff_pair_gap (min 0.12mm) (opt 0.15mm))
+	(condition "A.NetClass == 'USB2_90R'")
+)
+
+(rule "USB2_90R track width"
+	(constraint track_width (min 0.16mm))
+	(condition "A.NetClass == 'USB2_90R'")
+)
+
+# ---------------------------------------------------------------------------
+# MDI — 100 ohm differential. Same gap window as the 90 ohm classes; the
+# width is 0.150 (spec 6.4).
+# ---------------------------------------------------------------------------
+
+(rule "MDI_100R pair gap"
+	(constraint diff_pair_gap (min 0.12mm) (opt 0.15mm))
+	(condition "A.NetClass == 'MDI_100R'")
+)
+
+(rule "MDI_100R track width"
+	(constraint track_width (min 0.13mm))
+	(condition "A.NetClass == 'MDI_100R'")
+)
+
+# The pair sits at 0.15 gap while the class clearance is 0.2, so the two
+# traces of a pair need an explicit allowance. Scoped to MDI-to-MDI only;
+# JLC's published minimum copper spacing is 0.09 mm.
+(rule "MDI pair clearance"
+	(constraint clearance (min 0.10mm))
+	(condition "A.NetClass == 'MDI_100R' && B.NetClass == 'MDI_100R'")
+)
+
+# ---------------------------------------------------------------------------
+# Power — the 5 V pour carries 4.83 A in 1 oz outer copper (spec S8.4).
+# This rule covers traces; pours are sized by inspection against the same
+# number.
+#
+# The trace floor is the BRANCH requirement, not the trunk: each downstream
+# port is 0.9 A, which needs 0.27 mm at 10 C rise in 1 oz (spec S8.4), and
+# the 4.83 A trunk is the +5V pour, not a trace. An 0.80 mm floor here fired
+# on 119 branch stubs that are correctly sized, which is noise, not a check.
+# ---------------------------------------------------------------------------
+
+(rule "PWR_5V minimum width"
+	(constraint track_width (min 0.30mm))
+	(condition "A.NetClass == 'PWR_5V'")
+)
+
+(rule "PWR_12V minimum width"
+	(constraint track_width (min 0.60mm))
+	(condition "A.NetClass == 'PWR_12V'")
+)
+
+# VIN_RAW (J1 VBUS -> F1) is the one net that has to cross J1's own 0.5 mm pad
+# field, so it has its own class. The corridor between the two pad rows is
+# 1.00 mm: 0.70 mm fits mid-corridor, but the pad escapes cannot be 0.60 mm at
+# the pads. They are <= 0.83 mm long and conduct into the adjoining 0.70 mm
+# copper, so 0.40 mm is allowed here and the 0.60 mm rule still guards the rest
+# of the 12 V rail.
+(rule "PWR_12V_IN pad escape width"
+	(constraint track_width (min 0.40mm))
+	(condition "A.NetClass == 'PWR_12V_IN'")
+)
