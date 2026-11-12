@@ -199,14 +199,9 @@ CC dividers.
 
 ## Where the parts depart from the class the schematic asked for
 
-Three lines are not what the sheet says, each for a reason that is a fact about
+Two lines are not what the sheet says, each for a reason that is a fact about
 the catalogue, not a preference:
 
-- **C3, 10 nF.** The sheet's part class said C0G, but the policy above
-  puts C0G only under 1 nF. C0G in 0402 at 10 nF is thin on stock;
-  X7R 0402 50 V is a basic part with 6 M behind it. C3 sets the 5 V converter's
-  soft-start ramp, where ±10 % over temperature is inside the tolerance the
-  controller tolerates. It ships as X7R.
 - **C4, 4.7 uF.** There is no 4.7 uF 0603 part at 50 V in any dielectric in
   the catalogue: 0603 X7R stops below that at every stocked maker. C4 sits on
   `VREG5`, the 5 V converter's own LDO output, so 25 V is 5× headroom. It ships
